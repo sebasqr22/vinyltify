@@ -11,7 +11,6 @@ export class AuthService {
     private token: string | undefined;
     private client_id = '933d3430c2e6442eac18add3a796497d';
     private redirect_uri = "http://localhost:4200/disk";
-    private cancelUri = 'http://localhost:4200';
 
     constructor(private router: Router) {
         this.spotifyApi = new SpotifyWebApi();
@@ -30,8 +29,8 @@ export class AuthService {
     
     login(): void {
         var state = this.generateString(16);
-        var scope = 'user-top-read';
-        window.location.href = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&redirect_uri=${this.redirect_uri}&response_type=token&show_dialog=true&scope=${scope}&state=${state}&cancelUri=${this.cancelUri}`;
+        var scope = ['user-top-read'];
+        window.location.href = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&redirect_uri=${this.redirect_uri}&response_type=token&show_dialog=true&scope=${scope}&state=${state}`;
     }
 
     setAccessToken(token: string): void {
